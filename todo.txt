@@ -1,0 +1,11 @@
+O parametro passado é um array String[], ou seja, equivalente a uma matriz 2d, esse parametro reprensenta um filete de DNA.
+Os filetes de DNA devem seguir o seguinte modelo:
+- N x N
+- Só podem conter: (A, T, C, G)
+
+ou seja,
+- todos os elementos do array devem conter uma string com o mesmo tamanho do array (array.length === string.length)
+- todos os elementos do array devem contar uma string somente com as letras: A, T, C, G
+
+Um DNA é símio quando 1+ sequências de 4 letras iguais nas direções horizontais, verticais ou diagonais forem encontradas.
+Caso contrario, o DNA é humano.

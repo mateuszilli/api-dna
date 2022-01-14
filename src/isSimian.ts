@@ -1,34 +1,73 @@
 type DNA = Array<string>
 
 export function isSimian(dna: DNA) {
-    const letters = ['A', 'T', 'C', 'G']
-    const lettersLength = letters.length
     const dnaLength = dna.length
 
-    for (let i = 0; i < lettersLength; i++) {
-        const letter = letters[i];
+    // scan horizontal and vertical
+    for (let j = 0; j < dnaLength; j++) {
+        let horizontalCount = 0
+        let verticalCount = 0
+        let horizontalLetter = ''
+        let verticalLetter = ''
 
-        // scan horizontal and vertical
-        for (let j = 0; j < dnaLength; j++) {
-            for (let k = 0; k < dnaLength; k++) {
-                console.log(dna[j][k])
-                console.log(dna[k][j])
+        for (let k = 0; k < dnaLength; k++) {
+            if (horizontalLetter === dna[j][k]) {
+                horizontalCount++
+            } else {
+                horizontalCount = 1
+                horizontalLetter = dna[j][k]
             }
-        }
 
-        // scan diagonals
-        for (let j = 0; j <= 2 * (dnaLength); ++j) {
-            for (let k = dnaLength - 1; k >= 0; --k) {
-                let l1 = j - k;
-                if (l1 >= 0 && l1 < dnaLength) {
-                    console.log(dna[k][l1])
-                }
+            if (verticalLetter === dna[k][j]) {
+                verticalCount++
+            } else {
+                verticalCount = 1
+                verticalLetter = dna[k][j]
+            }
 
-                let l2 = j - (dnaLength - k);
-                if (l2 >= 0 && l2 < dnaLength) {
-                    console.log(dna[k][l2])
-                }
+            if (horizontalCount > 3 || verticalCount > 3) {
+                console.log('horizontalCount', horizontalCount)
+                console.log('verticalCount', verticalCount)
+                return true
             }
         }
     }
+
+    // scan diagonals
+    for (let j = 0; j <= 2 * dnaLength; j++) {
+        let diagonalLeftCount = 0
+        let diagonalRightCount = 0
+        let diagonalLeftLetter = ''
+        let diagonalRightLetter = ''
+
+        for (let k = dnaLength - 1; k >= 0; k--) {
+            let l1 = j - k;
+            if (l1 >= 0 && l1 < dnaLength) {
+                if (diagonalLeftLetter === dna[k][l1]) {
+                    diagonalLeftCount++
+                } else {
+                    diagonalLeftCount = 1
+                    diagonalLeftLetter = dna[k][l1]
+                }
+            }
+
+            let l2 = j - (dnaLength - k);
+            if (l2 >= 0 && l2 < dnaLength) {
+                if (diagonalRightLetter === dna[k][l2]) {
+                    diagonalRightCount++
+                } else {
+                    diagonalRightCount = 1
+                    diagonalRightLetter = dna[k][l2]
+                }
+            }
+
+            if (diagonalLeftCount > 3 || diagonalRightCount > 3) {
+                console.log('diagonalLeftCount', diagonalLeftCount)
+                console.log('diagonalRightCount', diagonalRightCount)
+                return true
+            }
+        }
+    }
+
+    return false
 }

@@ -1,3 +1,3 @@
 // Type definitions for api-dna
 
-export type DNA = String[]
+export type DNA = string[]

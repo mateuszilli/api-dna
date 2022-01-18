@@ -12,9 +12,9 @@ class StatsController {
       const ratio = count_mutant_dna / count_human_dna
 
       response.status(200).json({ count_mutant_dna, count_human_dna, ratio })
-
     } catch (error) {
-      response.sendStatus(400)
+      console.error(error)
+      response.sendStatus(500)
     }
   }
 }

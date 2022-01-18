@@ -1,5 +1,7 @@
 import mongoose from 'mongoose'
 
-mongoose.connect('mongodb://localhost:27017/dna')
+const DATABASE_URL = process.env.DATABASE_URL!
+
+mongoose.connect(DATABASE_URL)
 
 export { mongoose }

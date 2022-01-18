@@ -1,6 +1,18 @@
+import { string } from 'yargs'
 import { DNA } from '../@types'
 
 class SimianService {
+  static isInvalid(dna: DNA): string | void {
+    const dnaLength = dna.length
+
+    for (let i = 0; i < dnaLength; i++) {
+      const line = dna[i]
+
+      if (line.length != dnaLength) return 'The DNA is invalid: The number of rows and columns must be equal'
+      if (!line.match(/^[ATCG]+$/g)) return 'The DNA is invalid: The characters must be A, T, C or G'
+    }
+  }
+
   static isSimian(dna: DNA): boolean {
     const dnaLength = dna.length
 

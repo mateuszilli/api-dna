@@ -1,3 +1,3 @@
 describe('test describe', () => {
-    it('test it', () => {})
+  it('test it', () => { })
 })

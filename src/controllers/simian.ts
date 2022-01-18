@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 
-import { SimianService } from '../services/simian'
+import { DNAService } from '../services/dna'
 
 import { Sample } from '../models/sample'
 
@@ -10,7 +10,7 @@ class SimianController {
       let isSimianResponse: boolean
       const { dna } = request.body
 
-      const isInvalid = SimianService.isInvalid(dna)
+      const isInvalid = DNAService.isInvalid(dna)
       if (isInvalid) {
         return response.status(400).json({ message: isInvalid })
       }
@@ -21,7 +21,7 @@ class SimianController {
       if (exists) {
         isSimianResponse = exists.isSimian
       } else {
-        const isSimian = SimianService.isSimian(dna)
+        const isSimian = DNAService.isSimian(dna)
         isSimianResponse = isSimian
         await Sample.create({ dna: dnaString, isSimian: isSimian })
       }

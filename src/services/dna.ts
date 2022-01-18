@@ -1,7 +1,6 @@
-import { string } from 'yargs'
 import { DNA } from '../@types'
 
-class SimianService {
+class DNAService {
   static isInvalid(dna: DNA): string | void {
     const dnaLength = dna.length
 
@@ -78,4 +77,4 @@ class SimianService {
   }
 }
 
-export { SimianService }
+export { DNAService }

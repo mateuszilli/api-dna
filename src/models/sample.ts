@@ -2,9 +2,13 @@ import { mongoose } from '../../database'
 
 const SampleSchema = new mongoose.Schema({
     dna: {
-        type: [String],
+        type: String,
         required: true,
         unique: true
+    },
+    isSimian: {
+        type: Boolean,
+        required: true
     },
     createdAt: {
         type: Date,
@@ -12,6 +16,6 @@ const SampleSchema = new mongoose.Schema({
     }
 });
 
-const Sample = mongoose.model('Sample', SampleSchema);
+const Sample = mongoose.model('sample', SampleSchema);
 
 export { Sample }

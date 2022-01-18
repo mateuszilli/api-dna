@@ -7,16 +7,22 @@ import { Sample } from '../models/sample'
 
 class SimianController {
     async create(request: Request, response: Response) {
-        const { dna } = request.body
+        try {
+            const { dna } = request.body
 
-        const isSimian = SimianService.isSimian(dna)
+            const isSimian = SimianService.isSimian(dna)
+            const dnaString = dna.join('-')
 
-        await Sample.create({ dna: dna })
+            await Sample.create({ dna: dnaString, isSimian: isSimian })
 
-        if (isSimian === true) {
-            response.sendStatus(200)
-        } else {
-            response.sendStatus(403)
+            if (isSimian === true) {
+                response.sendStatus(200)
+            } else {
+                response.sendStatus(403)
+            }
+
+        } catch (error) {
+            response.sendStatus(400)
         }
     }
 }

@@ -17,7 +17,32 @@ yarn install
 yarn dev
 ```
 
-You can also use docker, run:
+or you can also use docker, run:
 ```bash
 docker-compose up -d
+```
+
+## API resources
+
+### POST /simian
+```bash
+curl --request POST \
+  --url http://localhost:3000/simian \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "dna": [
+      "ATCCCC",
+      "CTGTGC",
+      "TAGTGC",
+      "AGCAGG",
+      "CAACTA",
+      "TCACTG"
+    ]
+  }'
+```
+
+### GET /stats
+```bash
+curl --request GET \
+  --url http://localhost:3000/stats
 ```

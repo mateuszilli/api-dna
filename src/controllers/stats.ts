@@ -5,13 +5,24 @@ import { Sample } from '../models/sample'
 class StatsController {
   async read(_request: Request, response: Response) {
     try {
-      const [isNotSimian, isSimian] = await Sample.aggregate([{ $group: { _id: "$isSimian", count: { $sum: 1 } } }])
+      const result = {
+        count_mutant_dna: 0,
+        count_human_dna: 0,
+        ratio: 0
+      }
 
-      const count_mutant_dna = isSimian.count
-      const count_human_dna = isNotSimian.count
-      const ratio = count_mutant_dna / count_human_dna
+      const aggregateCount = await Sample.aggregate([{ $group: { _id: "$isSimian", count: { $sum: 1 } } }])
+      aggregateCount.map(({ _id, count }) => {
+        if (_id === true) {
+          result.count_mutant_dna = count
+        } else {
+          result.count_human_dna = count
+        }
+      })
 
-      response.status(200).json({ count_mutant_dna, count_human_dna, ratio })
+      result.ratio = result.count_mutant_dna / result.count_human_dna
+
+      response.status(200).json(result)
     } catch (error) {
       console.error(error)
       response.sendStatus(500)

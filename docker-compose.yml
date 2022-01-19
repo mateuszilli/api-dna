@@ -1,0 +1,44 @@
+version: '3'
+
+services:
+  mongo:
+    container_name: mongo
+    image: mongo:5.0
+    restart: unless-stopped
+    env_file: ./.env
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=$DB_USER
+      - MONGO_INITDB_ROOT_PASSWORD=$DB_PASSWORD
+    ports:
+      - $DB_PORT:$DB_PORT
+    volumes:
+      - db:/data/db
+    networks:
+      - dna
+  api:
+    container_name: api
+    depends_on:
+      - mongo
+    build: .
+    restart: unless-stopped
+    env_file: ./.env
+    ports:
+      - $PORT:$PORT
+    environment:
+      - PORT=$PORT
+      - DB_USER=$DB_USER
+      - DB_PASSWORD=$DB_PASSWORD
+      - DB_HOST=mongo
+      - DB_PORT=$DB_PORT
+      - DB_NAME=$DB_NAME
+    networks:
+      - dna
+    stdin_open: true
+    tty: true
+
+volumes:
+  db:
+
+networks:
+  dna:
+    driver: bridge

@@ -11,7 +11,13 @@ Project built with the main objective of studies and technical task for a vacanc
 
 ## How to run
 
+After you have the dependencies installed, run:
 ```bash
-yarn
+yarn install
 yarn dev
+```
+
+You can also use docker, run:
+```bash
+docker-compose up -d
 ```

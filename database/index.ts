@@ -1,7 +1,14 @@
 import mongoose from 'mongoose'
 
-const DATABASE_URL = process.env.DATABASE_URL!
+const {
+  DB_USER,
+  DB_PASSWORD,
+  DB_HOST,
+  DB_PORT,
+  DB_NAME,
+} = process.env
 
-mongoose.connect(DATABASE_URL)
+const URI = `mongodb://${DB_USER}:${DB_PASSWORD}@${DB_HOST}:${DB_PORT}/${DB_NAME}?authSource=admin`
+mongoose.connect(URI)
 
 export { mongoose }

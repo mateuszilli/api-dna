@@ -1,6 +1,6 @@
 # api-dna
 
-Project built with the main objective of studies and technical task for a vacancy of software engineer in Mercado Livre.
+Project built with the main objective of studies and technical task for a vacancy of software engineer.
 
 
 ## Dependencies
